@@ -113,6 +113,10 @@ def resnet18(pretrained=False, **kwargs):
 def resnet(**kwargs):
     model = resnet18(pretrained=True, **kwargs)
 
+    # Freeze layers to finetune
+    for param in model.parameters():
+        param.requires_grad = False
+
     # Replace last FC layer to a 4-out layer
     fc_in_size = model.fc.in_features
     model.fc = nn.Linear(fc_in_size, 4)
