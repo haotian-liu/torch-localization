@@ -1,1 +1,4 @@
 data/*
+*.path.tar
+*.tar.gz
+*.zip
