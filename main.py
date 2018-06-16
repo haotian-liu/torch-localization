@@ -36,6 +36,7 @@ fine_tune_layers = set(model.fc.parameters())
 fine_tune_layers |= set(model.layer4.parameters())
 fine_tune_layers |= set(model.layer3.parameters())
 fine_tune_layers |= set(model.layer2.parameters())
+fine_tune_layers |= set(model.layer1.parameters())
 
 pretrained_layers = set(model.parameters()) - fine_tune_layers
 
@@ -54,7 +55,7 @@ epoch_acc = {'train': [], 'test': []}
 epochs = 20
 for epoch in range(epochs):
     if epoch == 5:
-        optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+        optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
         scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
     accs = AverageMeter()
