@@ -2,3 +2,4 @@ data/*
 *.path.tar
 *.tar.gz
 *.zip
+__pycache__/*
