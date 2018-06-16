@@ -32,7 +32,7 @@ model = resnet()
 model = CUDA_OR_GPU(model)
 criterion = CUDA_OR_GPU(nn.SmoothL1Loss())
 
-optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+optimizer = torch.optim.Adam(model.fc.parameters(), lr=1e-3)
 scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
 best_model_state = model.state_dict()
