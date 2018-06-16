@@ -35,14 +35,12 @@ criterion = CUDA_OR_GPU(nn.SmoothL1Loss())
 fine_tune_layers = set(model.fc.parameters())
 fine_tune_layers |= set(model.layer4.parameters())
 fine_tune_layers |= set(model.layer3.parameters())
-fine_tune_layers |= set(model.layer2.parameters())
-fine_tune_layers |= set(model.layer1.parameters())
 
 pretrained_layers = set(model.parameters()) - fine_tune_layers
 
 optimizer = torch.optim.Adam([
-    {'params': list(pretrained_layers)},
-    {'params': list(fine_tune_layers), 'lr': 1e-2},
+    {'params': list(pretrained_layers), 'lr': 1e-4},
+    {'params': list(fine_tune_layers), 'lr': 1e-3},
 ], lr=1e-3)
 scheduler = lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.1)
 
