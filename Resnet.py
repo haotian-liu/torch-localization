@@ -27,8 +27,8 @@ class BasicBlock(nn.Module):
         residual = x
 
         out = self.conv1(x)
-        out = self.bn1(out)
         out = self.relu(out)
+        out = self.bn1(out)
 
         out = self.conv2(out)
         out = self.bn2(out)
@@ -84,8 +84,8 @@ class ResNet(nn.Module):
 
     def forward(self, x):
         x = self.conv1(x)
-        x = self.bn1(x)
         x = self.relu(x)
+        x = self.bn1(x)
         x = self.maxpool(x)
 
         x = self.layer1(x)
