@@ -35,6 +35,7 @@ criterion = CUDA_OR_GPU(nn.SmoothL1Loss())
 fine_tune_layers = set(model.fc.parameters())
 fine_tune_layers |= set(model.layer4.parameters())
 fine_tune_layers |= set(model.layer3.parameters())
+fine_tune_layers |= set(model.layer2.parameters())
 
 pretrained_layers = set(model.parameters()) - fine_tune_layers
 
