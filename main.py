@@ -24,7 +24,7 @@ datasets = load_data()
 # Training
 
 dataloaders = {split: torch.utils.data.DataLoader(
-                datasets[split], batch_size=32,shuffle=(split=='train'),
+                datasets[split], batch_size=50,shuffle=(split=='train'),
                 num_workers=2, pin_memory=True) for split in ('train', 'test')}
 
 # construct model
