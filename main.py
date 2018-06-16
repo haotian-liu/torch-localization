@@ -19,9 +19,7 @@ CUDA_OR_GPU = lambda x: x.cpu() if CPU_MODE else x.cuda()
 if not GPU_ONLY:
     plt.ion()
 
-train_id, test_id = split(0.2)
-splits = {'train': train_id, 'test': test_id}
-datasets = {split: CUBDataset(splits[split]) for split in ('train', 'test')}
+datasets = load_data()
 
 # Training
 

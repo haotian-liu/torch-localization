@@ -2,6 +2,24 @@ import random
 import math
 import torch
 import matplotlib.pyplot as plt
+from Dataset import CUBDataset
+import os.path
+import _pickle as pickle
+
+def base_path():
+    return os.path.dirname(os.path.abspath(__file__))
+
+def load_data():
+    pickle_path = base_path() + "/data/datasets.pkl"
+    if os.path.isfile(pickle_path):
+        print("Using pickled data!")
+        return pickle.load(open(pickle_path, 'rb'))
+    train_id, test_id = split(0.2)
+    splits = {'train': train_id, 'test': test_id}
+    datasets = {split: CUBDataset(splits[split]) for split in ('train', 'test')}
+    pickle.dump(datasets, open(pickle_path, 'wb'))
+    print("Data loaded from disk and has been pickled!")
+    return datasets
 
 def to_2d_tensor(inp):
     inp = torch.Tensor(inp)
