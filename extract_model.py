@@ -15,13 +15,18 @@ f_alias_map = {
     'running_var': 'moving_variance',
 }
 
+alias_map_pre = {
+    'bn1': 'bn_1',
+    'bn2': 'bn_2',
+    'downsample/0': 'shortcut',
+    'downsample/1': 'bn_0'
+}
+
 alias_map = {
     'running_mean': 'moving_mean',
     'running_var': 'moving_variance',
     'conv1/weight': 'conv_1/kernel',
     'conv2/weight': 'conv_2/kernel',
-    'bn1': 'bn_1',
-    'bn2': 'bn_2',
     'bn_1/bias': 'bn_1/beta',
     'bn_1/weight': 'bn_1/gamma',
     'bn_2/bias': 'bn_2/beta',
@@ -32,8 +37,6 @@ alias_map = {
     'layer4': 'conv5',
     '/0/': '_1/',
     '/1/': '_2/',
-    'downsample_1': 'shortcut',
-    'downsample_2': 'bn_0',
     'shortcut/weight': 'shortcut/kernel',
     'bn_0/bias': 'bn_0/beta',
     'bn_0/weight': 'bn_0/gamma',
@@ -55,6 +58,8 @@ for key, value in pretrained_model.items():
         for _f, _r in f_alias_map.items():
             key = key.replace(_f, _r)
     else:
+        for _f, _r in alias_map_pre.items():
+            key = key.replace(_f, _r)
         for _f, _r in alias_map.items():
             key = key.replace(_f, _r)
 
